@@ -94,5 +94,5 @@ jobs:
             with:
                 name: '${{ github.event.inputs.target }} toolchain (Binutils ${{ github.event.inputs.binutils_version }}, GCC ${{ github.event.inputs.gcc_version }}, GDB ${{ github.event.inputs.gdb_version }})'
                 artifacts: ${{ steps.create-artifact.outputs.ARTIFACT_PATH }}
-                tag: ${{ steps.create-artifact.outputs.ARTIFACT }}
+                tag: ${{ github.event.inputs.target }}
                 
