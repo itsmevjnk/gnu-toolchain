@@ -1,4 +1,4 @@
-name: CI
+name: Build GNU toolchain
 
 on:
     workflow_dispatch:
