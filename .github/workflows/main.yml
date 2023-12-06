@@ -78,12 +78,19 @@ jobs:
                 make -j`nproc`
                 make -j`nproc` install
         -   name: Create artifact
+            id: create-artifact
             run: |
                 cd $GITHUB_WORKSPACE
                 tar -cJf $ARTIFACT.tar.xz $ARTIFACT
+                echo ARTIFACT=$ARTIFACT >> "$GITHUB_OUTPUT"
+                echo ARTIFACT_PATH=$GITHUB_WORKSPACE/$ARTIFACT >> "$GITHUB_OUTPUT"
         -   name: Upload artifact
             uses: actions/upload-artifact@v3
             with:
-                name: $ARTIFACT
-                path: $GITHUB_WORKSPACE/$ARTIFACT.tar.xz
-            
+                name: ${{ steps.create-artifact.outputs.ARTIFACT }}
+                path: ${{ steps.create-artifact.outputs.ARTIFACT_PATH }}
+        -   name: Create release
+            uses: ncipollo/release-action@v1
+            with:
+                name: '${{ github.event.inputs.target }} toolchain (Binutils ${{ github.event.inputs.binutils_version }}, GCC ${{ github.event.inputs.gcc_version }}, GDB ${{ github.event.inputs.gdb_version }})'
+                artifacts: ${{ steps.create-artifact.outputs.ARTIFACT_PATH }}
