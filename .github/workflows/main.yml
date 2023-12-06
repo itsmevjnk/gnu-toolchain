@@ -83,7 +83,7 @@ jobs:
                 cd $GITHUB_WORKSPACE
                 tar -cJf $ARTIFACT.tar.xz $ARTIFACT
                 echo ARTIFACT=$ARTIFACT >> "$GITHUB_OUTPUT"
-                echo ARTIFACT_PATH=$GITHUB_WORKSPACE/$ARTIFACT >> "$GITHUB_OUTPUT"
+                echo ARTIFACT_PATH=$GITHUB_WORKSPACE/$ARTIFACT.tar.xz >> "$GITHUB_OUTPUT"
         -   name: Upload artifact
             uses: actions/upload-artifact@v3
             with:
