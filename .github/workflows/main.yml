@@ -49,7 +49,7 @@ jobs:
                 tar -xf gdb-$GDB_VERSION.tar.xz
         -   name: Prepare output directory
             run: |
-                mkdir -p $PREFIX
+                mkdir -p $GITHUB_WORKSPACE/$ARTIFACT
         -   name: Build Binutils
             run: |
                 mkdir -p $GITHUB_WORKSPACE/build_binutils
